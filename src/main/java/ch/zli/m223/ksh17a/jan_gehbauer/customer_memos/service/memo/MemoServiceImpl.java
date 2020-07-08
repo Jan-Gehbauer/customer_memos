@@ -36,7 +36,7 @@ public class MemoServiceImpl implements MemoService {
 	@Override
 	public MemoDto createMemo(MemoDto memoDto) {
 		
-		return new MemoDto(memoRepository.createMemo(memoDto.customerId, memoDto.note, memoDto.date));
+		return new MemoDto(memoRepository.createMemo(memoDto.customer, memoDto.note));
 	}
 
 	@Override

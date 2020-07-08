@@ -1,10 +1,14 @@
 package ch.zli.m223.ksh17a.jan_gehbauer.customer_memos.model.memo;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import ch.zli.m223.ksh17a.jan_gehbauer.customer_memos.model.customer.Customer;
+import ch.zli.m223.ksh17a.jan_gehbauer.customer_memos.model.customer.CustomerImpl;
 
 @Entity(name = "Memo")
 public class MemoImpl implements Memo {
@@ -13,17 +17,19 @@ public class MemoImpl implements Memo {
 	@GeneratedValue
 	private Long id;
 	
-	private Long customerId;
+	@ManyToOne
+	private CustomerImpl customer;
+	
 	private String note;
-	private Date date;
+	private long date;
 	
 	protected MemoImpl() {} // for JPA only
 	
-	public MemoImpl(Long customerId, String note, Date date) {
+	public MemoImpl(CustomerImpl customer, String note) {
 		
-		this.customerId = customerId;
+		this.customer = customer;
 		this.note = note;
-		this.date = date;
+		this.date = new Date().getTime();
 	}
 	
 	@Override
@@ -33,9 +39,9 @@ public class MemoImpl implements Memo {
 	}
 	
 	@Override
-	public Long getCustomerId() {
+	public Customer getCustomer() {
 		
-		return customerId;
+		return customer;
 	}
 	
 	@Override
@@ -45,7 +51,7 @@ public class MemoImpl implements Memo {
 	}
 	
 	@Override
-	public Date getDate() {
+	public long getDate() {
 		
 		return date;
 	}
