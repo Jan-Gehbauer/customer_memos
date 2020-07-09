@@ -19,15 +19,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http
 			.authorizeRequests()
-				.antMatchers("/", "/home", "/rest/customers/**").permitAll()
+				.antMatchers("/", "/home", "/rest/customers/**", "/swagger-ui/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
 				.loginPage("/login")
 				.permitAll()
 				.and()
+				.csrf().disable()
 			.logout()
 				.permitAll();
+			
 	}
 
 	@Bean
