@@ -11,7 +11,11 @@ import ch.zli.m223.ksh17a.jan_gehbauer.customer_memos.model.memo.MemoImpl;
 
 public interface MemoRepository extends JpaRepository<MemoImpl, Long> {
 	
+	// find a memo by customer id
+	
 	List<Memo> findMemoByCustomerId(Long customerId);
+	
+	// create a new memo
 	
 	public default Memo createMemo(Customer customer, String note) {
 		
